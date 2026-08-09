@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marley & James — September 18–19, 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,400&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#AEBB98;
+    --sage-deep:#68764F;
+    --sage-pale:#E4E7D9;
+    --cream:#FAF7EF;
+    --wood:#8C6F4E;
+    --ink:#2B2A22;
+    --line:rgba(43,42,34,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    line-height:1.7;
+  }
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:450; color:var(--ink); letter-spacing:0.005em; }
+  .label{
+    font-family:'Jost', sans-serif;
+    font-size:0.72rem;
+    font-weight:500;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+  }
+  a{ color:inherit; }
+  :focus-visible{ outline:2px solid var(--sage-deep); outline-offset:3px; }
+  p{ color:#4A4839; }
+
+  /* botanical line-art sprig, reused as signature motif */
+  .sprig{ display:block; opacity:0.9; }
+  .sprig path, .sprig ellipse{ stroke:var(--sage-deep); fill:none; stroke-width:1.3; stroke-linecap:round; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,247,239,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:1.1rem 1.5rem;
+    display:flex; align-items:center; justify-content:center; gap:2.4rem;
+    flex-wrap:wrap;
+  }
+  nav a{
+    font-size:0.7rem;
+    font-weight:500;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--ink);
+    position:relative;
+    padding:0.2rem 0;
+  }
+  nav a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px;
+    background:var(--sage-deep); transform:scaleX(0); transition:transform 0.25s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after{ transform:scaleX(1); }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:90vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:6rem 1.5rem 4rem;
+    background:
+      radial-gradient(ellipse at 50% 0%, var(--sage-pale) 0%, transparent 65%),
+      var(--cream);
+  }
+  .hero-eyebrow{
+    font-size:0.72rem;
+    font-weight:500;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+    margin-bottom:2rem;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 8.5vw, 5.8rem);
+    line-height:1.02;
+    font-weight:450;
+  }
+  .hero .amp{ font-style:italic; font-weight:300; color:var(--sage-deep); }
+  .hero-sub{
+    margin-top:1.9rem;
+    font-size:0.85rem;
+    font-weight:500;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink);
+  }
+  .hero-sub .dot{ color:var(--sage-deep); margin:0 0.7rem; }
+  .hero-note{
+    margin-top:1.6rem;
+    max-width:480px;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:1.05rem;
+    color:var(--sage-deep);
+  }
+  .hero .sprig{ margin-top:2.6rem; width:70px; height:auto; }
+
+  section{ position:relative; padding:6rem 1.5rem; max-width:900px; margin:0 auto; }
+  .section-head{ text-align:center; margin-bottom:3.5rem; }
+  .section-head h2{ font-size:clamp(1.9rem, 4.5vw, 2.6rem); margin-top:0.5rem; }
+  .section-head .sprig{ width:44px; margin:1.4rem auto 0; }
+
+  /* SCHEDULE */
+  .day-block{ margin-bottom:4rem; }
+  .day-block:last-child{ margin-bottom:0; }
+  .day-title{
+    display:flex; align-items:baseline; gap:0.9rem; margin-bottom:2.2rem;
+    border-bottom:1px solid var(--line);
+    padding-bottom:0.9rem;
+  }
+  .day-title .num{ font-size:0.72rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--sage-deep); }
+  .stop{
+    display:grid; grid-template-columns:110px 1fr; gap:1.2rem;
+    padding:1.1rem 0;
+    border-bottom:1px solid var(--line);
+  }
+  .stop:last-child{ border-bottom:none; }
+  .stop-time{ font-size:0.78rem; font-weight:500; letter-spacing:0.06em; color:var(--wood); padding-top:0.2rem; }
+  .stop-name{ font-family:'Fraunces', serif; font-size:1.25rem; font-weight:450; }
+  .stop-note{ font-size:0.92rem; margin-top:0.25rem; color:#5A5847; }
+
+  /* TRAVEL */
+  .cards{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:1.4rem; }
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:1.9rem;
+  }
+  .card h3{ font-size:1.1rem; margin-bottom:0.7rem; font-weight:500; }
+  .card p{ font-size:0.92rem; }
+  .edit-note{
+    margin-top:0.9rem;
+    border:1px dashed var(--sage-deep);
+    border-radius:2px;
+    padding:0.6rem 0.8rem;
+    font-size:0.7rem;
+    letter-spacing:0.04em;
+    color:var(--sage-deep);
+    background:var(--sage-pale);
+  }
+
+  /* RSVP */
+  .rsvp-wrap{
+    background:var(--sage-deep);
+    border-radius:3px;
+    padding:3.2rem 2rem;
+    color:var(--cream);
+  }
+  .rsvp-wrap .section-head h2{ color:var(--cream); }
+  .rsvp-wrap .label{ color:var(--sage-pale); }
+  .rsvp-wrap .sprig path{ stroke:var(--sage-pale); }
+  form{ display:flex; flex-direction:column; gap:1.3rem; max-width:540px; margin:0 auto; }
+  .field{ display:flex; flex-direction:column; gap:0.4rem; }
+  .field label{ font-size:0.7rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--sage-pale); }
+  .field input[type="text"], .field input[type="number"], .field textarea, .field select{
+    background:rgba(250,247,239,0.1);
+    border:1px solid rgba(250,247,239,0.35);
+    border-radius:2px;
+    padding:0.7rem 0.85rem;
+    color:var(--cream);
+    font-family:'Jost', sans-serif;
+    font-size:0.98rem;
+  }
+  .field select option{ color:var(--ink); }
+  .field textarea{ resize:vertical; min-height:70px; }
+  .field input::placeholder, .field textarea::placeholder{ color:rgba(250,247,239,0.45); }
+  .radio-row{ display:flex; gap:1.5rem; flex-wrap:wrap; }
+  .radio-row label{ display:flex; align-items:center; gap:0.5rem; text-transform:none; letter-spacing:0; font-weight:400; font-size:0.95rem; color:var(--cream); }
+  .day-checks{ display:flex; gap:1.5rem; flex-wrap:wrap; }
+  .day-checks label{ display:flex; align-items:center; gap:0.5rem; font-size:0.92rem; text-transform:none; letter-spacing:0; font-weight:400; color:var(--cream); }
+  button[type="submit"]{
+    margin-top:0.5rem;
+    background:var(--cream);
+    color:var(--sage-deep);
+    border:none;
+    border-radius:2px;
+    padding:0.95rem 1.5rem;
+    font-size:0.78rem;
+    font-weight:500;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  button[type="submit"]:hover{ background:#fff; transform:translateY(-1px); }
+  button[type="submit"]:disabled{ opacity:0.6; cursor:default; transform:none; }
+  .rsvp-status{ font-size:0.85rem; min-height:1.2em; }
+  .rsvp-status.ok{ color:var(--sage-pale); }
+  .rsvp-status.err{ color:#E3B08C; }
+
+  /* REGISTRY */
+  .registry-note{
+    text-align:center;
+    max-width:560px;
+    margin:0 auto 2rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:1.15rem;
+    color:var(--sage-deep);
+  }
+
+  /* FAQ */
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-item:first-child{ border-top:1px solid var(--line); }
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    padding:1.3rem 0; display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    font-family:'Fraunces', serif; font-size:1.08rem; font-weight:450; color:var(--ink);
+  }
+  .faq-q .plus{ color:var(--sage-deep); font-size:1.1rem; transition:transform 0.2s ease; flex-shrink:0; font-family:'Jost',sans-serif; }
+  .faq-item.open .faq-q .plus{ transform:rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height 0.3s ease; font-size:0.94rem; color:#5A5847; }
+  .faq-a p{ padding-bottom:1.3rem; }
+
+  /* GALLERY */
+  .gallery{ display:grid; grid-template-columns:repeat(3, 1fr); gap:0.7rem; }
+  .frame{
+    aspect-ratio:1;
+    border:1px dashed var(--line);
+    background:#fff;
+    border-radius:2px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.68rem;
+    letter-spacing:0.05em;
+    text-align:center;
+    color:var(--sage-deep);
+    padding:0.5rem;
+  }
+  @media (max-width:640px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
+
+  footer{
+    text-align:center;
+    padding:3.5rem 1.5rem 4.5rem;
+    font-size:0.72rem;
+    font-weight:500;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+  }
+  footer .sprig{ width:34px; margin:0 auto 1.2rem; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#schedule">Schedule</a>
+  <a href="#travel">Travel</a>
+  <a href="#rsvp">RSVP</a>
+  <a href="#registry">Registry</a>
+  <a href="#faq">FAQ</a>
+  <a href="#gallery">Gallery</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Hensonville, New York</div>
+  <h1>Marley <span class="amp">&amp;</span> James</h1>
+  <div class="hero-sub">SEPTEMBER 18–19, 2027<span class="dot">·</span>THE HENSON</div>
+  <p class="hero-note">"Foreign and familiar all the same" — we're gathering the people we love in the mountains that brought us together.</p>
+  <svg class="sprig" viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30,5 C30,35 30,65 30,85"/>
+    <path d="M30,20 C22,15 14,17 10,25 C18,26 25,25 30,20 Z"/>
+    <path d="M30,20 C38,15 46,17 50,25 C42,26 35,25 30,20 Z"/>
+    <path d="M30,38 C22,33 14,35 10,43 C18,44 25,43 30,38 Z"/>
+    <path d="M30,38 C38,33 46,35 50,43 C42,44 35,43 30,38 Z"/>
+    <path d="M30,56 C24,52 18,53 15,59 C21,60 26,59 30,56 Z"/>
+    <path d="M30,56 C36,52 42,53 45,59 C39,60 34,59 30,56 Z"/>
+    <ellipse cx="30" cy="8" rx="4" ry="5"/>
+  </svg>
+</section>
+
+<section id="schedule">
+  <div class="section-head">
+    <div class="label">The Weekend</div>
+    <h2>Schedule</h2>
+    <svg class="sprig" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2,15 C15,10 25,10 30,15 C35,10 45,10 58,15"/>
+      <ellipse cx="30" cy="15" rx="2.4" ry="2.4"/>
+    </svg>
+  </div>
+
+  <div class="day-block">
+    <div class="day-title"><span class="num">Day One</span><h3>Friday, September 18</h3></div>
+    <div class="stop">
+      <div class="stop-time">4:00 PM</div>
+      <div><div class="stop-name">Guest Arrival & Check-In</div><div class="stop-note">Settle in at The Henson — grab a drink at the honor bar.</div></div>
+    </div>
+    <div class="stop">
+      <div class="stop-time">6:30 PM</div>
+      <div><div class="stop-name">Welcome Dinner</div><div class="stop-note">Casual dinner on the lawn, weather permitting. Come as you are.</div></div>
+    </div>
+    <div class="stop">
+      <div class="stop-time">9:00 PM</div>
+      <div><div class="stop-name">Fireside Nightcap</div><div class="stop-note">Rooftop deck, mountain views, no rush.</div></div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-title"><span class="num">Day Two</span><h3>Saturday, September 19</h3></div>
+    <div class="stop">
+      <div class="stop-time">4:00 PM</div>
+      <div><div class="stop-name">Ceremony</div><div class="stop-note">On the lawn at The Henson.</div></div>
+    </div>
+    <div class="stop">
+      <div class="stop-time">4:30 PM</div>
+      <div><div class="stop-name">Cocktail Hour</div><div class="stop-note">Garden and rooftop deck.</div></div>
+    </div>
+    <div class="stop">
+      <div class="stop-time">6:00 PM</div>
+      <div><div class="stop-name">Reception & Dinner</div><div class="stop-note">Seasonal Hudson Valley menu, courtesy of Matilda.</div></div>
+    </div>
+    <div class="stop">
+      <div class="stop-time">9:00 PM</div>
+      <div><div class="stop-name">Dancing</div><div class="stop-note">Until we're told to stop.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="travel">
+  <div class="section-head">
+    <div class="label">Getting There</div>
+    <h2>Travel &amp; Lodging</h2>
+    <svg class="sprig" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2,15 C15,10 25,10 30,15 C35,10 45,10 58,15"/>
+      <ellipse cx="30" cy="15" rx="2.4" ry="2.4"/>
+    </svg>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <h3>The Venue</h3>
+      <p>The Henson<br>39 Goshen Road<br>Hensonville, NY 12439</p>
+      <p style="margin-top:0.6rem;">A 16-room boutique inn in the northern Catskills — 5 minutes from Windham Mountain, 10 from Hunter Mountain. Free on-site parking and Wi-Fi.</p>
+    </div>
+    <div class="card">
+      <h3>Getting Here</h3>
+      <p>Roughly 2.5–3 hours by car from NYC, via the NY Thruway toward Windham/Hensonville. Closest regional airport is Albany (ALB), about 1 hour away.</p>
+      <div class="edit-note">Add shuttle info or carpool coordination here once confirmed.</div>
+    </div>
+    <div class="card">
+      <h3>Staying at The Henson</h3>
+      <p>The Henson's 16 rooms will fill fast — book early.</p>
+      <div class="edit-note">Add your room block name/code and booking link + cutoff date here.</div>
+    </div>
+    <div class="card">
+      <h3>Nearby Alternatives</h3>
+      <p>Windham and the surrounding Hensonville/Greene County area offer additional inns and rentals for guests who'd like more options.</p>
+      <div class="edit-note">List 2–3 backup hotel or Airbnb recommendations here.</div>
+    </div>
+  </div>
+</section>
+
+<section id="rsvp">
+  <div class="rsvp-wrap">
+    <div class="section-head">
+      <div class="label">Kindly Reply</div>
+      <h2>RSVP</h2>
+      <svg class="sprig" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2,15 C15,10 25,10 30,15 C35,10 45,10 58,15"/>
+        <ellipse cx="30" cy="15" rx="2.4" ry="2.4"/>
+      </svg>
+    </div>
+    <form id="rsvpForm">
+      <div class="field">
+        <label for="name">Full name(s)</label>
+        <input type="text" id="name" placeholder="Jordan Smith (+ guest name if applicable)" required>
+      </div>
+
+      <div class="field">
+        <label>Will you be joining us?</label>
+        <div class="radio-row">
+          <label><input type="radio" name="attending" value="yes" required> Joyfully accept</label>
+          <label><input type="radio" name="attending" value="no"> Regretfully decline</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Which day(s)?</label>
+        <div class="day-checks">
+          <label><input type="checkbox" name="day" value="Friday welcome dinner"> Fri — Welcome Dinner</label>
+          <label><input type="checkbox" name="day" value="Saturday wedding"> Sat — Wedding</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="guests">Number attending (incl. you)</label>
+        <input type="number" id="guests" min="1" max="10" value="1">
+      </div>
+
+      <div class="field">
+        <label for="meal">Meal preference</label>
+        <select id="meal">
+          <option value="No preference">No preference</option>
+          <option value="Meat">Meat</option>
+          <option value="Fish">Fish</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Vegan">Vegan</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="dietary">Dietary restrictions / allergies</label>
+        <textarea id="dietary" placeholder="Let us know here"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="song">Song that'll get you on the dance floor</label>
+        <input type="text" id="song" placeholder="Optional">
+      </div>
+
+      <div class="field">
+        <label for="note">Note for Marley & James</label>
+        <textarea id="note" placeholder="Optional"></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn">Submit RSVP</button>
+      <div class="rsvp-status" id="rsvpStatus" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<section id="registry">
+  <div class="section-head">
+    <div class="label">A Small Ask</div>
+    <h2>Registry</h2>
+    <svg class="sprig" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2,15 C15,10 25,10 30,15 C35,10 45,10 58,15"/>
+      <ellipse cx="30" cy="15" rx="2.4" ry="2.4"/>
+    </svg>
+  </div>
+  <p class="registry-note">Your presence at The Henson is the only gift we need. For those who'd like to do more, details will be added here soon.</p>
+  <div class="edit-note" style="max-width:520px; margin:0 auto;">Add registry links or honeymoon fund details here once finalized.</div>
+</section>
+
+<section id="faq">
+  <div class="section-head">
+    <div class="label">Before You Pack</div>
+    <h2>FAQ</h2>
+    <svg class="sprig" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2,15 C15,10 25,10 30,15 C35,10 45,10 58,15"/>
+      <ellipse cx="30" cy="15" rx="2.4" ry="2.4"/>
+    </svg>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q"><span>What should I wear?</span><span class="plus">+</span></button>
+    <div class="faq-a"><p>Cocktail attire, mountain-ready. The ceremony and reception are outdoors on the lawn, and evenings cool off fast — bring a layer or wrap.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q"><span>What if it rains?</span><span class="plus">+</span></button>
+    <div class="faq-a"><p>The Henson has indoor space to move the celebration if needed. Either way, the day goes on.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q"><span>Are kids welcome?</span><span class="plus">+</span></button>
+    <div class="faq-a"><p>[Add your policy here — e.g. adults-only celebration, or kids welcome.]</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q"><span>Is there parking?</span><span class="plus">+</span></button>
+    <div class="faq-a"><p>Yes — The Henson offers free on-site parking for all guests.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q"><span>What's the RSVP deadline?</span><span class="plus">+</span></button>
+    <div class="faq-a"><p>[Add your RSVP deadline date here.]</p></div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-head">
+    <div class="label">Along the Way</div>
+    <h2>Gallery</h2>
+    <svg class="sprig" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2,15 C15,10 25,10 30,15 C35,10 45,10 58,15"/>
+      <ellipse cx="30" cy="15" rx="2.4" ry="2.4"/>
+    </svg>
+  </div>
+  <div class="gallery">
+    <div class="frame">Add photo</div>
+    <div class="frame">Add photo</div>
+    <div class="frame">Add photo</div>
+    <div class="frame">Add photo</div>
+    <div class="frame">Add photo</div>
+    <div class="frame">Add photo</div>
+  </div>
+</section>
+
+<footer>
+  <svg class="sprig" viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30,5 C30,35 30,65 30,85"/>
+    <path d="M30,20 C22,15 14,17 10,25 C18,26 25,25 30,20 Z"/>
+    <path d="M30,20 C38,15 46,17 50,25 C42,26 35,25 30,20 Z"/>
+    <path d="M30,38 C22,33 14,35 10,43 C18,44 25,43 30,38 Z"/>
+    <path d="M30,38 C38,33 46,35 50,43 C42,44 35,43 30,38 Z"/>
+    <ellipse cx="30" cy="8" rx="4" ry="5"/>
+  </svg>
+  M &amp; J &nbsp;·&nbsp; SEPT 18–19, 2027 &nbsp;·&nbsp; HENSONVILLE, NY
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    const ans = item.querySelector('.faq-a');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        if(other !== item){
+          other.classList.remove('open');
+          other.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      if(isOpen){
+        item.classList.remove('open');
+        ans.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
+    });
+  });
+
+  const form = document.getElementById('rsvpForm');
+  const statusEl = document.getElementById('rsvpStatus');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    statusEl.textContent = 'Sending...';
+    statusEl.className = 'rsvp-status';
+
+    const name = document.getElementById('name').value.trim();
+    const attending = form.querySelector('input[name="attending"]:checked')?.value;
+    const days = Array.from(form.querySelectorAll('input[name="day"]:checked')).map(el => el.value);
+    const guests = document.getElementById('guests').value;
+    const meal = document.getElementById('meal').value;
+    const dietary = document.getElementById('dietary').value.trim();
+    const song = document.getElementById('song').value.trim();
+    const note = document.getElementById('note').value.trim();
+
+    const entry = { name, attending, days, guests, meal, dietary, song, note, submittedAt: new Date().toISOString() };
+    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'guest';
+    const key = `rsvp:${slug}-${Date.now()}`;
+
+    try {
+      const result = await window.storage.set(key, JSON.stringify(entry), true);
+      if (result) {
+        statusEl.textContent = attending === 'yes'
+          ? "You're on the list — thank you!"
+          : "We'll miss you — thanks for letting us know.";
+        statusEl.className = 'rsvp-status ok';
+        form.reset();
+      } else {
+        throw new Error('no result');
+      }
+    } catch (err) {
+      statusEl.textContent = "Something went wrong — please try again in a moment.";
+      statusEl.className = 'rsvp-status err';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
