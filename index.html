@@ -72,72 +72,25 @@
   /* HERO */
   .hero{
     position:relative;
-    min-height:90vh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
     text-align:center;
     padding:6rem 1.5rem 4rem;
     overflow:hidden;
     background:
-      repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 5px),
-      radial-gradient(ellipse at 50% 30%, #9c7d59 0%, var(--wood) 70%);
-  }
-  .hero-board{
-    position:absolute; inset:0;
-    z-index:0;
-    pointer-events:none;
+      url('images/hero-fireplace.jpg') no-repeat 55% 20% / cover,
+      var(--wood);
   }
   .hero-overlay{
     position:absolute; inset:0;
     z-index:1;
     background:
-      radial-gradient(ellipse at 50% 45%, rgba(104,118,79,0.55) 0%, rgba(58,66,45,0.78) 68%),
-      rgba(43,42,34,0.25);
+      linear-gradient(180deg, rgba(20,18,10,0.15) 0%, rgba(20,18,10,0.08) 32%, rgba(30,32,20,0.5) 58%, rgba(20,20,12,0.88) 100%);
   }
   .hero-content{
     position:relative;
     z-index:2;
     display:flex; flex-direction:column; align-items:center;
-  }
-  .polaroid{
-    position:absolute;
-    background:#faf8f2;
-    padding:0.5rem 0.5rem 1.6rem;
-    border-radius:2px;
-    box-shadow:0 14px 30px rgba(20,18,10,0.45), 0 2px 6px rgba(20,18,10,0.25);
-    width:clamp(96px, 13vw, 188px);
-  }
-  .polaroid img{
-    display:block;
-    width:100%;
-    aspect-ratio:2/3;
-    object-fit:cover;
-    border-radius:1px;
-  }
-  .polaroid::before{
-    content:'';
-    position:absolute;
-    top:-9px; left:50%;
-    transform:translateX(-50%);
-    width:16px; height:16px;
-    border-radius:50%;
-    background:radial-gradient(circle at 32% 30%, #f6e4b8, #a97c1f 75%);
-    box-shadow:0 2px 4px rgba(0,0,0,0.4);
-  }
-  .polaroid.p1{ top:6%; left:4%; transform:rotate(-7deg); }
-  .polaroid.p2{ top:9%; right:5%; transform:rotate(6deg); }
-  .polaroid.p3{ bottom:9%; left:6%; transform:rotate(5deg); }
-  .polaroid.p4{ bottom:7%; right:4%; transform:rotate(-5deg); }
-  .polaroid.p5{ top:44%; left:1.5%; transform:rotate(-9deg); }
-  @media (max-width:900px){
-    .polaroid{ width:clamp(84px, 15vw, 130px); }
-    .polaroid.p5{ display:none; }
-  }
-  @media (max-width:640px){
-    .polaroid{ width:22vw; padding:0.35rem 0.35rem 1.1rem; }
-    .polaroid.p1{ top:3%; left:3%; }
-    .polaroid.p2{ top:3%; right:3%; }
-    .polaroid.p3{ bottom:3%; left:3%; }
-    .polaroid.p4{ bottom:3%; right:3%; }
   }
   .hero-eyebrow{
     font-size:0.72rem;
@@ -339,13 +292,6 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-board" aria-hidden="true">
-    <div class="polaroid p1"><img src="images/engagement-4.jpg" alt="" loading="eager"></div>
-    <div class="polaroid p2"><img src="images/engagement-2.jpg" alt="" loading="eager"></div>
-    <div class="polaroid p3"><img src="images/engagement-5.jpg" alt="" loading="eager"></div>
-    <div class="polaroid p4"><img src="images/engagement-1.jpg" alt="" loading="eager"></div>
-    <div class="polaroid p5"><img src="images/engagement-3.jpg" alt="" loading="eager"></div>
-  </div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Hensonville, New York</div>
