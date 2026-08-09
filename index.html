@@ -73,19 +73,29 @@
   .hero{
     position:relative;
     min-height:100vh;
-    display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
     text-align:center;
     padding:6rem 1.5rem 4rem;
     overflow:hidden;
     background:
-      url('images/hero-fireplace.jpg') no-repeat 55% 20% / cover,
+      url('images/hero-fireplace.jpg') no-repeat center 30% / cover,
       var(--wood);
+  }
+  /* show the venue photo uncropped, full landscape, once there's room for it */
+  @media (min-width:900px){
+    .hero{
+      min-height:0;
+      height:56.2vw;
+      max-height:100vh;
+      background-position:center center;
+    }
   }
   .hero-overlay{
     position:absolute; inset:0;
     z-index:1;
     background:
-      linear-gradient(180deg, rgba(20,18,10,0.15) 0%, rgba(20,18,10,0.08) 32%, rgba(30,32,20,0.5) 58%, rgba(20,20,12,0.88) 100%);
+      radial-gradient(ellipse at 50% 50%, rgba(38,44,28,0.45) 0%, rgba(30,32,20,0.7) 70%),
+      rgba(20,18,10,0.2);
   }
   .hero-content{
     position:relative;
