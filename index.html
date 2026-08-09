@@ -94,13 +94,13 @@
     position:absolute; inset:0;
     z-index:1;
     background:
-      radial-gradient(ellipse at 50% 50%, rgba(38,44,28,0.45) 0%, rgba(30,32,20,0.7) 70%),
-      rgba(20,18,10,0.2);
+      radial-gradient(ellipse at 50% 50%, rgba(20,20,12,0.16) 0%, rgba(20,20,12,0.32) 75%);
   }
   .hero-content{
     position:relative;
     z-index:2;
     display:flex; flex-direction:column; align-items:center;
+    text-shadow:0 2px 18px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.5);
   }
   .hero-eyebrow{
     font-size:0.72rem;
@@ -135,7 +135,7 @@
     font-size:1.05rem;
     color:var(--sage-pale);
   }
-  .hero .sprig{ margin-top:2.6rem; width:70px; height:auto; }
+  .hero .sprig{ margin-top:2.6rem; width:70px; height:auto; filter:drop-shadow(0 1px 4px rgba(0,0,0,0.5)); }
   .hero .sprig path, .hero .sprig ellipse{ stroke:var(--sage-pale); }
 
   section{ position:relative; padding:6rem 1.5rem; max-width:900px; margin:0 auto; }
