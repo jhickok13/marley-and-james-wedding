@@ -76,33 +76,93 @@
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     text-align:center;
     padding:6rem 1.5rem 4rem;
+    overflow:hidden;
     background:
-      radial-gradient(ellipse at 50% 0%, var(--sage-pale) 0%, transparent 65%),
-      var(--cream);
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 5px),
+      radial-gradient(ellipse at 50% 30%, #9c7d59 0%, var(--wood) 70%);
+  }
+  .hero-board{
+    position:absolute; inset:0;
+    z-index:0;
+    pointer-events:none;
+  }
+  .hero-overlay{
+    position:absolute; inset:0;
+    z-index:1;
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(104,118,79,0.55) 0%, rgba(58,66,45,0.78) 68%),
+      rgba(43,42,34,0.25);
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .polaroid{
+    position:absolute;
+    background:#faf8f2;
+    padding:0.5rem 0.5rem 1.6rem;
+    border-radius:2px;
+    box-shadow:0 14px 30px rgba(20,18,10,0.45), 0 2px 6px rgba(20,18,10,0.25);
+    width:clamp(96px, 13vw, 188px);
+  }
+  .polaroid img{
+    display:block;
+    width:100%;
+    aspect-ratio:2/3;
+    object-fit:cover;
+    border-radius:1px;
+  }
+  .polaroid::before{
+    content:'';
+    position:absolute;
+    top:-9px; left:50%;
+    transform:translateX(-50%);
+    width:16px; height:16px;
+    border-radius:50%;
+    background:radial-gradient(circle at 32% 30%, #f6e4b8, #a97c1f 75%);
+    box-shadow:0 2px 4px rgba(0,0,0,0.4);
+  }
+  .polaroid.p1{ top:6%; left:4%; transform:rotate(-7deg); }
+  .polaroid.p2{ top:9%; right:5%; transform:rotate(6deg); }
+  .polaroid.p3{ bottom:9%; left:6%; transform:rotate(5deg); }
+  .polaroid.p4{ bottom:7%; right:4%; transform:rotate(-5deg); }
+  .polaroid.p5{ top:44%; left:1.5%; transform:rotate(-9deg); }
+  @media (max-width:900px){
+    .polaroid{ width:clamp(84px, 15vw, 130px); }
+    .polaroid.p5{ display:none; }
+  }
+  @media (max-width:640px){
+    .polaroid{ width:22vw; padding:0.35rem 0.35rem 1.1rem; }
+    .polaroid.p1{ top:3%; left:3%; }
+    .polaroid.p2{ top:3%; right:3%; }
+    .polaroid.p3{ bottom:3%; left:3%; }
+    .polaroid.p4{ bottom:3%; right:3%; }
   }
   .hero-eyebrow{
     font-size:0.72rem;
     font-weight:500;
     letter-spacing:0.28em;
     text-transform:uppercase;
-    color:var(--sage-deep);
+    color:var(--sage-pale);
     margin-bottom:2rem;
   }
   .hero h1{
     font-size:clamp(2.6rem, 8.5vw, 5.8rem);
     line-height:1.02;
     font-weight:450;
+    color:var(--cream);
   }
-  .hero .amp{ font-style:italic; font-weight:300; color:var(--sage-deep); }
+  .hero .amp{ font-style:italic; font-weight:300; color:var(--sage-pale); }
   .hero-sub{
     margin-top:1.9rem;
     font-size:0.85rem;
     font-weight:500;
     letter-spacing:0.14em;
     text-transform:uppercase;
-    color:var(--ink);
+    color:var(--cream);
   }
-  .hero-sub .dot{ color:var(--sage-deep); margin:0 0.7rem; }
+  .hero-sub .dot{ color:var(--sage-pale); margin:0 0.7rem; }
   .hero-note{
     margin-top:1.6rem;
     max-width:480px;
@@ -110,9 +170,10 @@
     font-style:italic;
     font-weight:300;
     font-size:1.05rem;
-    color:var(--sage-deep);
+    color:var(--sage-pale);
   }
   .hero .sprig{ margin-top:2.6rem; width:70px; height:auto; }
+  .hero .sprig path, .hero .sprig ellipse{ stroke:var(--sage-pale); }
 
   section{ position:relative; padding:6rem 1.5rem; max-width:900px; margin:0 auto; }
   .section-head{ text-align:center; margin-bottom:3.5rem; }
@@ -278,20 +339,30 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-eyebrow">Hensonville, New York</div>
-  <h1>Marley <span class="amp">&amp;</span> James</h1>
-  <div class="hero-sub">SEPTEMBER 18–19, 2027<span class="dot">·</span>THE HENSON</div>
-  <p class="hero-note">"Foreign and familiar all the same" — we're gathering the people we love in the mountains that brought us together.</p>
-  <svg class="sprig" viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
-    <path d="M30,5 C30,35 30,65 30,85"/>
-    <path d="M30,20 C22,15 14,17 10,25 C18,26 25,25 30,20 Z"/>
-    <path d="M30,20 C38,15 46,17 50,25 C42,26 35,25 30,20 Z"/>
-    <path d="M30,38 C22,33 14,35 10,43 C18,44 25,43 30,38 Z"/>
-    <path d="M30,38 C38,33 46,35 50,43 C42,44 35,43 30,38 Z"/>
-    <path d="M30,56 C24,52 18,53 15,59 C21,60 26,59 30,56 Z"/>
-    <path d="M30,56 C36,52 42,53 45,59 C39,60 34,59 30,56 Z"/>
-    <ellipse cx="30" cy="8" rx="4" ry="5"/>
-  </svg>
+  <div class="hero-board" aria-hidden="true">
+    <div class="polaroid p1"><img src="images/engagement-4.jpg" alt="" loading="eager"></div>
+    <div class="polaroid p2"><img src="images/engagement-2.jpg" alt="" loading="eager"></div>
+    <div class="polaroid p3"><img src="images/engagement-5.jpg" alt="" loading="eager"></div>
+    <div class="polaroid p4"><img src="images/engagement-1.jpg" alt="" loading="eager"></div>
+    <div class="polaroid p5"><img src="images/engagement-3.jpg" alt="" loading="eager"></div>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Hensonville, New York</div>
+    <h1>Marley <span class="amp">&amp;</span> James</h1>
+    <div class="hero-sub">SEPTEMBER 18–19, 2027<span class="dot">·</span>THE HENSON</div>
+    <p class="hero-note">"Foreign and familiar all the same" — we're gathering the people we love in the mountains that brought us together.</p>
+    <svg class="sprig" viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30,5 C30,35 30,65 30,85"/>
+      <path d="M30,20 C22,15 14,17 10,25 C18,26 25,25 30,20 Z"/>
+      <path d="M30,20 C38,15 46,17 50,25 C42,26 35,25 30,20 Z"/>
+      <path d="M30,38 C22,33 14,35 10,43 C18,44 25,43 30,38 Z"/>
+      <path d="M30,38 C38,33 46,35 50,43 C42,44 35,43 30,38 Z"/>
+      <path d="M30,56 C24,52 18,53 15,59 C21,60 26,59 30,56 Z"/>
+      <path d="M30,56 C36,52 42,53 45,59 C39,60 34,59 30,56 Z"/>
+      <ellipse cx="30" cy="8" rx="4" ry="5"/>
+    </svg>
+  </div>
 </section>
 
 <section id="schedule">
